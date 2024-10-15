@@ -25,6 +25,11 @@ public class Reservation {
     private String customerEmail;
     private String customerName;
     private String customerPhone;
+    private String reservationNumber;
+
+    private String getReservationNumber() {
+        return id + customerPhone.substring((customerPhone.length()*3)/4) + car.getId() + customerPhone.substring(0, customerPhone.length()/4);
+    }
 
     @Override
     public final boolean equals(Object o) {

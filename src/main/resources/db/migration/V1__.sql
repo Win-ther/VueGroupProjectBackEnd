@@ -14,13 +14,14 @@ CREATE TABLE car
 
 CREATE TABLE reservation
 (
-    id             BIGINT AUTO_INCREMENT NOT NULL,
-    date_from      date                  NULL,
-    date_to        date                  NULL,
-    car_id         BIGINT                NULL,
-    customer_email VARCHAR(255)          NULL,
-    customer_name  VARCHAR(255)          NULL,
-    customer_phone VARCHAR(255)          NULL,
+    id                 BIGINT AUTO_INCREMENT NOT NULL,
+    date_from          date                  NULL,
+    date_to            date                  NULL,
+    car_id             BIGINT                NULL,
+    customer_email     VARCHAR(255)          NULL,
+    customer_name      VARCHAR(255)          NULL,
+    customer_phone     VARCHAR(255)          NULL,
+    reservation_number VARCHAR(255)          NULL,
     CONSTRAINT pk_reservation PRIMARY KEY (id)
 );
 
