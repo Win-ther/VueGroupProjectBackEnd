@@ -1,7 +1,9 @@
 package se.iths.vuegroupprojectbackend.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -10,6 +12,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "reservation")
 public class Reservation {
@@ -27,8 +31,8 @@ public class Reservation {
     private String customerPhone;
     private String reservationNumber;
 
-    private String getReservationNumber() {
-        return id + customerPhone.substring((customerPhone.length()*3)/4) + car.getId() + customerPhone.substring(0, customerPhone.length()/4);
+    public String generateReservationNumber() {
+        return customerName.charAt(0) + customerPhone.substring((customerPhone.length()*3)/4) + car.getId() + customerPhone.substring(0, customerPhone.length()/4);
     }
 
     @Override
