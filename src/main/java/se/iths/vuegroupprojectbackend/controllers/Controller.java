@@ -4,7 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import se.iths.vuegroupprojectbackend.dto.CarDTO;
+import se.iths.vuegroupprojectbackend.dto.DeleteReservationDTO;
 import se.iths.vuegroupprojectbackend.dto.ReservationDTO;
+import se.iths.vuegroupprojectbackend.entities.Car;
 import se.iths.vuegroupprojectbackend.entities.Reservation;
 import se.iths.vuegroupprojectbackend.services.CarService;
 import se.iths.vuegroupprojectbackend.services.ReservationService;
@@ -40,7 +42,18 @@ public class Controller {
 
     @PostMapping("reservations")
     String reserveCar(@RequestBody ReservationDTO reservationDTO) {
-        return reservationService.saveReservation(reservationDTO, carService.convertToEntity(carService.findById(reservationDTO.carId())));
+        CarDTO car = carService.findById(reservationDTO.carId());
+        String reservationNumber = reservationService.saveReservation(reservationDTO, carService.convertToEntity(car));
+        if (reservationNumber != null && !reservationNumber.isEmpty() && !reservationNumber.isBlank()) {
+            carService.increasePopularity(carService.convertToEntity(car));
+            return reservationNumber;
+        }
+        return "Could not reserve the car";
+    }
+
+    @DeleteMapping("delete")
+    boolean deleteReservation(@RequestBody DeleteReservationDTO reservationNumber) {
+        return reservationService.deleteReservation(reservationNumber.reservationNumber());
     }
 
 }

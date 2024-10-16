@@ -29,6 +29,13 @@ public class Car {
     private int price;
     private String about;
 
+    public void increasePopularity(){
+        popularity++;
+    }
+    public void decreasePopularity(){
+        popularity--;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

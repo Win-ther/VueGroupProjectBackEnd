@@ -32,7 +32,7 @@ public class Reservation {
     private String reservationNumber;
 
     public String generateReservationNumber() {
-        return customerName.charAt(0) + customerPhone.substring((customerPhone.length()*3)/4) + car.getId() + customerPhone.substring(0, customerPhone.length()/4);
+        return customerName.charAt(0) + customerPhone.substring((customerPhone.length()*3)/4) + car.getId() + car.getPopularity() + customerPhone.substring(0, customerPhone.length()/4);
     }
 
     @Override

@@ -19,6 +19,14 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
+    public boolean deleteReservation(String reservationNumber) {
+        var reservation = reservationRepository.findByReservationNumber(reservationNumber);
+        if (reservation == null)
+            return false;
+        reservationRepository.delete(reservation);
+        return true;
+    }
+
     public String saveReservation(ReservationDTO reservationDTO, Car car) {
         Reservation reservation = new Reservation();
         reservation.setDateFrom(Date.valueOf(reservationDTO.dateFrom()));
@@ -30,4 +38,5 @@ public class ReservationService {
         reservation.setReservationNumber(reservation.generateReservationNumber());
         return reservationRepository.save(reservation).getReservationNumber();
     }
+
 }

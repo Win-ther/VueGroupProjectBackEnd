@@ -47,6 +47,7 @@ public class CarService {
                 car.getAbout()
         );
     }
+
     public Car convertToEntity(CarDTO car) {
         return new Car(
                 car.id(),
@@ -59,5 +60,10 @@ public class CarService {
                 car.price(),
                 car.about()
         );
+    }
+
+    public void increasePopularity(Car car) {
+        car.increasePopularity();
+        carRepository.save(car);
     }
 }
