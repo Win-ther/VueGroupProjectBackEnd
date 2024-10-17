@@ -28,10 +28,7 @@ public class CarService {
 
     public CarDTO findById(Long id) {
         Optional<Car> car = carRepository.findById(id);
-        if (car.isPresent()) {
-            return convertToDTO(carRepository.findById(id).get());
-        }
-        return null;
+        return car.map(this::convertToDTO).orElse(null);
     }
 
     public CarDTO convertToDTO(Car car) {
