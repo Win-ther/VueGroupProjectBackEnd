@@ -34,8 +34,6 @@ class ReservationTest {
         reservation2.setCustomerEmail("Email@email.email");
         reservation2.setCustomerName("Jeff Burnham");
         reservation2.setCustomerPhone("0808050505");
-
-
     }
 
     @Test

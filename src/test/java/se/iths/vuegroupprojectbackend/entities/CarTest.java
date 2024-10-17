@@ -12,7 +12,7 @@ class CarTest {
 
     @BeforeEach
     void setUp() {
-        car = new Car(1L, "imagelink", "model", 5, 4, "Automatic", "Petrol", 200, "Car description");
+        car = new Car(1L, "imageLink", "model", 5, 4, "Automatic", "Petrol", 200, "Car description");
         car2 = new Car(2L, "imageLink", "model", 5, 4, "Automatic", "Petrol", 200, "Car description");
     }
 
