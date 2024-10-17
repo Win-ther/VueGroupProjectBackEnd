@@ -106,12 +106,46 @@ class ControllerTest {
     }
 
     @Test
-    void reserveCarFailure() throws Exception {
+    void reserveCarFailureWithNull() throws Exception {
         Car car = new Car(1L, "imageLink", "carModel", 32, 4, "Automatic", "Petrol 95", 300, "THIS IS CAR1");
         when(carService.findById(1L)).thenReturn(car1);
         when(carService.convertToEntity(car1)).thenReturn(car);
         doNothing().when(carService).increasePopularity(any());
         when(reservationService.saveReservation(any(ReservationDTO.class), any())).thenReturn(null);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+                        .contentType("Application/Json")
+                        .content("{\"carId\": 1, \"dateFrom\": \"2023-04-11\", \"dateTo\": \"2024-05-23\", \"customerEmail\": \"email@email.email\", \"customerName\": \"name name\", \"customerPhone\": \"0708456545\"}"))
+                .andExpectAll(
+                        status().isOk(),
+                        content().contentType("text/plain;charset=UTF-8"),
+                        content().string("Could not reserve the car")
+                );
+    }
+    @Test
+    void reserveCarFailureEmpty() throws Exception {
+        Car car = new Car(1L, "imageLink", "carModel", 32, 4, "Automatic", "Petrol 95", 300, "THIS IS CAR1");
+        when(carService.findById(1L)).thenReturn(car1);
+        when(carService.convertToEntity(car1)).thenReturn(car);
+        doNothing().when(carService).increasePopularity(any());
+        when(reservationService.saveReservation(any(ReservationDTO.class), any())).thenReturn("");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+                        .contentType("Application/Json")
+                        .content("{\"carId\": 1, \"dateFrom\": \"2023-04-11\", \"dateTo\": \"2024-05-23\", \"customerEmail\": \"email@email.email\", \"customerName\": \"name name\", \"customerPhone\": \"0708456545\"}"))
+                .andExpectAll(
+                        status().isOk(),
+                        content().contentType("text/plain;charset=UTF-8"),
+                        content().string("Could not reserve the car")
+                );
+    }
+    @Test
+    void reserveCarFailureBlank() throws Exception {
+        Car car = new Car(1L, "imageLink", "carModel", 32, 4, "Automatic", "Petrol 95", 300, "THIS IS CAR1");
+        when(carService.findById(1L)).thenReturn(car1);
+        when(carService.convertToEntity(car1)).thenReturn(car);
+        doNothing().when(carService).increasePopularity(any());
+        when(reservationService.saveReservation(any(ReservationDTO.class), any())).thenReturn("    ");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
                         .contentType("Application/Json")
