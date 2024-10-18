@@ -10,7 +10,7 @@ import se.iths.vuegroupprojectbackend.services.CarService;
 import se.iths.vuegroupprojectbackend.services.ReservationService;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/")
 public class Controller {
