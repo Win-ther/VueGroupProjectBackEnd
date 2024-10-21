@@ -50,8 +50,8 @@ public class Controller {
     }
 
     @DeleteMapping("delete")
-    boolean deleteReservation(@RequestBody DeleteReservationDTO reservationNumber) {
-        return reservationService.deleteReservation(reservationNumber.reservationNumber());
+    boolean deleteReservation(@RequestBody String reservationNumber) {
+        return reservationService.deleteReservation(reservationNumber);
     }
 
 }

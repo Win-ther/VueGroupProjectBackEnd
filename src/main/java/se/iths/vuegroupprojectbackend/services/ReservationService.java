@@ -20,10 +20,17 @@ public class ReservationService {
     }
 
     public boolean deleteReservation(String reservationNumber) {
-        var reservation = reservationRepository.findByReservationNumber(reservationNumber);
-        if (reservation == null)
+        var reservations = reservationRepository.findAll();
+        Reservation deleteReservation = null;
+        for (Reservation reservation : reservations) {
+            if (reservationNumber.contains(reservation.getReservationNumber())) {
+                deleteReservation = reservation;
+            }
+        }
+        if (deleteReservation == null) {
             return false;
-        reservationRepository.delete(reservation);
+        }
+        reservationRepository.delete(deleteReservation);
         return true;
     }
 
